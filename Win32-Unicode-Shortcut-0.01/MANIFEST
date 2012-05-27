@@ -1,0 +1,13 @@
+Changes
+Makefile.PL
+MANIFEST
+ppport.h
+README
+Shortcut.xs
+t/constant.t
+t/basic.t
+t/unicode.t
+t/compat.t
+lib/Win32/Unicode/Shortcut.pm
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
