@@ -44,7 +44,7 @@ our @EXPORT = qw(
                     SW_SHOWNORMAL
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 our $utf16le = find_encoding('UTF-16LE') ||
     croak "Failed to load UTF16-LE encoding\n";
 our $GetFullPathNameW = Win32::API->new('kernel32.dll', 'GetFullPathNameW', 'PNPP', 'N') ||
@@ -447,7 +447,7 @@ If the variable $Win32::Unicode::Shortcut::CROAK_ON_ERROR is setted to a true va
 C:\>perl -e "use Win32::Unicode::Shortcut; $Win32::Unicode::Shortcut::CROAK_ON_ERROR = 1; $L = new Win32::Unicode::Shortcut;"
 CoCreateInstance, CoInitialize has not been called
 
-It is advisable to set this variable before the unitialisation, and to reset it after, or to use the optional parameter of the initialisation functions to get it temporarly on during their execution.
+It is advisable to set this variable before the initialisation, and to reset it after, or to use the optional parameter of the initialisation functions to get it temporarly on during their execution.
 
 None by default.
 

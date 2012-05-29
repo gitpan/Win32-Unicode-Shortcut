@@ -14,13 +14,11 @@
 #define null_arg(sv)	(  SvROK(sv)  &&  SVt_PVAV == SvTYPE(SvRV(sv))	\
 			   &&  -1 == av_len((AV*)SvRV(sv))  )
 
-#if __STDC_VERSION__ < 199901L
-# if __GNUC__ >= 2
-#  define __myfunc__ __FUNCTION__
-# else
-#  define __myfunc__ "<unknown>"
-# endif
+#ifndef MAX_PATHW
+#define	MAX_PATHW 32767
 #endif
+
+#define MY_MAX_PATHW MAX_PATHW
 
 /* Copied from http://www.ooportal.com/basic-com-programming/module3/win32-apiFunction-formatMessage.php */
 #define EBUF_SIZ 2048
@@ -345,9 +343,9 @@ _GetDescription(ilink,ifile,croak_on_error)
 PPCODE:
     {
       HRESULT hres;
-      WCHAR wdescription[32767];
+      WCHAR wdescription[MY_MAX_PATHW];
       SV *sv = NULL;
-      hres = IShellLinkW_GetDescription(ilink, wdescription, 32767);
+      hres = IShellLinkW_GetDescription(ilink, wdescription, MY_MAX_PATHW);
       if (SUCCEEDED(hres)) {
 	ST(0) = wstr_to_sv(aTHX_ wdescription);
 	XSRETURN(1);
@@ -386,10 +384,10 @@ _GetPath(ilink,ifile,flags,croak_on_error)
 PPCODE:
     {
       HRESULT hres;
-      WCHAR wpath[32767];
+      WCHAR wpath[MY_MAX_PATHW];
       WIN32_FIND_DATAW file;
 
-      hres = IShellLinkW_GetPath(ilink, wpath, 32767, &file, flags);
+      hres = IShellLinkW_GetPath(ilink, wpath, MY_MAX_PATHW, &file, flags);
       if (SUCCEEDED(hres)) {
 	ST(0) = wstr_to_sv(aTHX_ wpath);
 	XSRETURN(1);
@@ -427,8 +425,8 @@ _GetArguments(ilink,ifile,croak_on_error)
 PPCODE:
     {
       HRESULT hres;
-      WCHAR warguments[32767];
-      hres = IShellLinkW_GetArguments(ilink, warguments, 32767);
+      WCHAR warguments[MY_MAX_PATHW];
+      hres = IShellLinkW_GetArguments(ilink, warguments, MY_MAX_PATHW);
       if (SUCCEEDED(hres)) {
 	ST(0) = wstr_to_sv(aTHX_ warguments);
 	XSRETURN(1);
@@ -466,8 +464,8 @@ _GetWorkingDirectory(ilink,ifile,croak_on_error)
 PPCODE:
     {
       HRESULT hres;
-      WCHAR dir[32767];
-      hres = IShellLinkW_GetWorkingDirectory(ilink, dir, 32767);
+      WCHAR dir[MY_MAX_PATHW];
+      hres = IShellLinkW_GetWorkingDirectory(ilink, dir, MY_MAX_PATHW);
       if (SUCCEEDED(hres)) {
 	ST(0) = wstr_to_sv(aTHX_ dir);
 	XSRETURN(1);
@@ -579,8 +577,8 @@ PPCODE:
     {
       HRESULT hres;
       int number;
-      WCHAR wlocation[32767];
-      hres = IShellLinkW_GetIconLocation(ilink, wlocation, 32767, &number);
+      WCHAR wlocation[MY_MAX_PATHW];
+      hres = IShellLinkW_GetIconLocation(ilink, wlocation, MY_MAX_PATHW, &number);
       if (SUCCEEDED(hres)) {
 	ST(0) = wstr_to_sv(aTHX_ wlocation);
 	XST_mIV(1,number);
@@ -602,9 +600,9 @@ PPCODE:
       HRESULT hres;
       hres = IShellLinkW_Resolve(ilink, NULL, flags);
       if (SUCCEEDED(hres)) {
-	WCHAR wpath[32767];
+	WCHAR wpath[MY_MAX_PATHW];
 	WIN32_FIND_DATAW file;
-	hres = IShellLinkW_GetPath(ilink, wpath, 32767, &file, 0);
+	hres = IShellLinkW_GetPath(ilink, wpath, MY_MAX_PATHW, &file, 0);
 	if (SUCCEEDED(hres)) {
 	  ST(0) = wstr_to_sv(aTHX_ wpath);
 	  XSRETURN(1);

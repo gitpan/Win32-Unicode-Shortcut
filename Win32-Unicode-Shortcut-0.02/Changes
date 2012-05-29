@@ -1,5 +1,8 @@
 Revision history for Perl extension Win32::Unicode::Shortcut.
 
+0.02  Tue May 29 07:20:00 2012
+	- missing typemap
+
 0.01  Thu May 24 18:56:29 2012
 	- original version; created by h2xs 1.23 with options
 		-cn Win32::Unicode::Shortcut
