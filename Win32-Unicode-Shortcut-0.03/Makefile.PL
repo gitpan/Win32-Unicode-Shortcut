@@ -1,4 +1,3 @@
-use 5.014002;
 use ExtUtils::MakeMaker;
 
 unless (($^O eq "MSWin32") || ($^O eq "cygwin")) {

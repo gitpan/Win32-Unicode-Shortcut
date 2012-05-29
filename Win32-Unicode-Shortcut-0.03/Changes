@@ -1,5 +1,8 @@
 Revision history for Perl extension Win32::Unicode::Shortcut.
 
+0.03  Tue May 29 22:57:00 2012
+	- removed the use in Makefile.PL and added t/threads.t
+
 0.02  Tue May 29 07:20:00 2012
 	- missing typemap
 
