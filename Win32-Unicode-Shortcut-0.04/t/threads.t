@@ -13,7 +13,7 @@ use threads;
 
 use Test::More tests => 21;
 BEGIN { use_ok('Win32::Unicode::Shortcut') };
-Win32::Unicode->import('COINIT_MULTITHREADED');
+Win32::Unicode::Shortcut->import('COINIT_APARTMENTTHREADED');
 
 #########################
 
@@ -33,7 +33,7 @@ foreach (0..19) {
 # Insert your test code below, the Test::More module is use()ed here so read
 # its man page ( perldoc Test::More ) for help writing this test script.
 sub start_thread {
-    Win32::Unicode::Shortcut->CoInitializeEx(COINIT_MULTITHREADED);
+    Win32::Unicode::Shortcut->CoInitializeEx(COINIT_APARTMENTTHREADED);
 
     my $LINK = new Win32::Unicode::Shortcut;
     die "Undefined object\n" if (! defined($LINK));

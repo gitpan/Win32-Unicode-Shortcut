@@ -43,7 +43,7 @@ our @EXPORT = qw(
                     SW_SHOWNORMAL
 );
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 our $utf16le = find_encoding('UTF-16LE') ||
     croak "Failed to load UTF16-LE encoding\n";
 our $GetFullPathNameW = Win32::API->new('kernel32.dll', 'GetFullPathNameW', 'PNPP', 'N') ||
